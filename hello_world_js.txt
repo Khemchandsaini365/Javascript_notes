@@ -1,0 +1,78 @@
+When we go through the problem and found that it's really easy problem,then why leetcode post this question.
+
+Because it's use the one important concept closure which is asked in most interviews.
+
+What is Closure ?
+
+A closure is a function that has access to variables from its outer (enclosing) lexical scope, even after that outer function has returned.
+
+Let's breakdown the definition -
+
+One thing is sure from the definition, closure is sometype of function.
+
+function someTypeOfFunction(y) {
+    console.log(y);
+}
+Second thing it can access variables outside of the lexical scope. In normal terms we can say it can access the variable which is declared outside of the function.
+
+const variable = "which declared outside of the function";
+function someTypeOfFunction(y) {
+    console.log(y);
+    console.log(variable);
+}
+Third thing after returning from outer function we can access the variable which is declared outside of the closure.
+
+const outerFunction = () => {
+    const variable = "which declared outside of the function";
+    function someTypeOfFunction(y) {
+        console.log(y);
+        console.log(variable);
+    }
+    return someTypeOfFunction;
+}
+const closure = outerFunction();
+Now the thing is, why it's show important.
+With the help of this we can create private variable in javascript.
+
+function counter() {
+  let count = 0;
+  
+  return {
+    increment: function() {
+      count++;
+      console.log(count);
+    },
+    decrement: function() {
+      count--;
+      console.log(count);
+    }
+  }
+}
+
+const c = counter();
+c.increment(); // Output: 1
+c.increment(); // Output: 2
+c.decrement(); // Output: 1
+In this example, counter returns an object with two methods: increment and decrement. These methods both have access to the count variable, which is enclosed within the returned object and acts as a private variable. The methods can modify the count variable, but it cannot be accessed or modified directly from outside the returned object, ensuring data privacy.
+
+List of common uses of Closure -
+
+Private variables and methods in object-oriented programming.
+Function factories that create functions with specific behavior depending on a parameter.
+Memoization, caching the result of an expensive function call to avoid recomputation.
+Event listeners and callbacks that need to access variables in the enclosing scope.
+Partial application and currying, creating a new function by fixing some of its arguments.
+Iteration over an array using forEach, map, filter, or reduce functions, which all take a function as an argument and can make use of closures to access variables in the outer scope.
+Emulating block scope in JavaScript before the introduction of the let and const keywords in ES6.
+Promises and asynchronous programming, using closures to capture variables that need to be accessed in a callback function.
+Managing state in Redux, a popular library for managing application state in React applications.
+Creating reusable utility functions that can be used in different parts of a codebase and require access to variables in the enclosing scope.
+Solution of this problem -
+
+Javascript
+
+var createHelloWorld = function() {
+    return function(...args) {
+        return "Hello World";
+    }
+};
