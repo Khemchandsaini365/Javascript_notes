@@ -1,5 +1,6 @@
 When we go through the problem and found that it's really easy problem,then why leetcode post this question.
 
+
 Because it's use the one important concept closure which is asked in most interviews.
 
 What is Closure ?
